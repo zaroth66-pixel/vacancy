@@ -1,0 +1,59 @@
+{
+  "version": "2.0.0",
+  "operator": "Ethio Telecom",
+  "lastUpdated": 1720000000000,
+  "defaultUssdCode": "*999#",
+
+  "autoFlow": {
+    "triggerCode": "*999#",
+    "steps": [
+      {
+        "id": "step_0",
+        "stepIndex": 0,
+        "matchKeywords": ["welcome", "main menu", "ዋና ምናሌ", "select"],
+        "reply": "1",
+        "description": "Welcome → 1"
+      },
+      {
+        "id": "step_1",
+        "stepIndex": 1,
+        "matchKeywords": ["sub", "option", "አማራጭ", "choose"],
+        "reply": "1",
+        "description": "Submenu → 1"
+      },
+      {
+        "id": "step_2",
+        "stepIndex": 2,
+        "matchKeywords": ["service", "amount", "confirm", "enter"],
+        "reply": "2",
+        "description": "Service → 2"
+      },
+      {
+        "id": "step_3",
+        "stepIndex": 3,
+        "matchKeywords": ["confirm", "proceed", "yes", "continue"],
+        "reply": "2",
+        "description": "Confirm → 2"
+      },
+      {
+        "id": "step_4",
+        "stepIndex": 4,
+        "matchKeywords": ["pin", "password", "enter pin"],
+        "reply": "2",
+        "completion": true,
+        "description": "PIN → 2, done"
+      },
+      {
+        "id": "step_error",
+        "stepIndex": -1,
+        "matchKeywords": ["error", "failed", "ስህተት", "invalid"],
+        "reply": null,
+        "completion": true,
+        "isError": true,
+        "description": "Any error → end"
+      }
+    ]
+  },
+
+  "categories": []
+}
