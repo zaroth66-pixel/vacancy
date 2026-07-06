@@ -3,16 +3,28 @@ name: Build Debug APK
 on:
   push:
     branches: [ main ]
+<<<<<<< HEAD
   workflow_dispatch:
+=======
+  workflow_dispatch:        # lets you trigger manually from GitHub UI
+>>>>>>> d7e540e54b3c2ddf8c96baa504eed7a77e8c3430
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< HEAD
       - name: Checkout
         uses: actions/checkout@v4
 
+=======
+      # ── 1. Checkout source ──────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. Java 17 ──────────────────────────────────────────────────────────
+>>>>>>> d7e540e54b3c2ddf8c96baa504eed7a77e8c3430
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -20,17 +32,23 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+<<<<<<< HEAD
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.2'
 
       - name: Cache Gradle packages
+=======
+      # ── 3. Cache Gradle deps (saves bandwidth on every run) ─────────────────
+      - name: Cache Gradle
+>>>>>>> d7e540e54b3c2ddf8c96baa504eed7a77e8c3430
         uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
+<<<<<<< HEAD
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
           restore-keys: ${{ runner.os }}-gradle-
 
@@ -43,6 +61,20 @@ jobs:
       - name: Build Debug APK
         run: gradle assembleDebug --no-daemon --stacktrace
 
+=======
+          key: gradle-${{ hashFiles('**/*.gradle.kts', '**/gradle-wrapper.properties') }}
+          restore-keys: gradle-
+
+      # ── 4. Grant execute permission ─────────────────────────────────────────
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      # ── 5. Build ─────────────────────────────────────────────────────────────
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      # ── 6. Upload APK as artifact — download from Actions tab ───────────────
+>>>>>>> d7e540e54b3c2ddf8c96baa504eed7a77e8c3430
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
@@ -50,7 +82,20 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
+<<<<<<< HEAD
       - name: Show APK size
         run: |
           APK=app/build/outputs/apk/debug/app-debug.apk
           [ -f "$APK" ] && echo "✅ APK size: $(du -sh $APK | cut -f1)" || (echo "❌ APK missing" && exit 1)
+=======
+      # ── 7. Print APK size ────────────────────────────────────────────────────
+      - name: APK size
+        run: |
+          APK=app/build/outputs/apk/debug/app-debug.apk
+          if [ -f "$APK" ]; then
+            echo "APK size: $(du -sh $APK | cut -f1)"
+          else
+            echo "APK not found — build may have failed"
+            exit 1
+          fi
+>>>>>>> d7e540e54b3c2ddf8c96baa504eed7a77e8c3430
