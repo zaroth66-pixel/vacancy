@@ -59,6 +59,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    // OkHttp REMOVED — offline-first, no network needed at runtime
     implementation("com.google.code.gson:gson:2.10.1")
+
+    // ── Added Dependencies to Fix Kotlin Compilation Errors ─────────────────
+    // Fixes "Unresolved reference: okhttp3"
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // Fixes "Unresolved reference: viewModels"
+    implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.0")
 }
