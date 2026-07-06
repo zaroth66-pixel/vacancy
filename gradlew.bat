@@ -9,7 +9,7 @@ set APP_HOME=%DIRNAME%
 set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
 set JAVA_EXE=java.exe
 %JAVA_EXE% -version >NUL 2>&1 || ( echo ERROR: JAVA_HOME is not set correctly. & goto fail )
-set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m"
+set DEFAULT_JVM_OPTS=-Xmx2048m -Xms512m
 %JAVA_EXE% %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-classpath" "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
 :end
 if "%ERRORLEVEL%"=="0" goto mainEnd
