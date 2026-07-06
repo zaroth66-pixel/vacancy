@@ -36,9 +36,9 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      # ── 5. Regenerate Wrapper (Fixes the missing GradleWrapperMain error) ───
+      # ── 5. Regenerate Wrapper (Clean & Safe Version) ────────────────────────
       - name: Regenerate Gradle Wrapper
-        run: jar cfe gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain || gradle wrapper --type binary
+        run: gradle :wrapper
 
       # ── 6. Build ─────────────────────────────────────────────────────────────
       - name: Build Debug APK
