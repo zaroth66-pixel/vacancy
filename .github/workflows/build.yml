@@ -36,9 +36,9 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      # ── 5. Regenerate Wrapper (Clean & Safe Version) ────────────────────────
+      # ── 5. Regenerate Wrapper (Forces a highly compatible Gradle 8.7 version)
       - name: Regenerate Gradle Wrapper
-        run: gradle :wrapper
+        run: gradle wrapper --gradle-version 8.7
 
       # ── 6. Build ─────────────────────────────────────────────────────────────
       - name: Build Debug APK
@@ -58,7 +58,7 @@ jobs:
       - name: APK size
         run: |
           APK=app/build/outputs/apk/debug/app-debug.apk
-          if [ -f "$APK" ]; then
+          if [ -f "$開P" -o -f "$APK" ]; then
             echo "APK size: $(du -sh $APK | cut -f1)"
           else
             echo "APK not found — build may have failed"
